@@ -49,6 +49,28 @@ class App extends Component {
     }
   };
 
+  renderPosts = post => (
+    <tr key={post.id}>
+      <td>{post.title}</td>
+      <td>
+        <button
+          className="btn btn-info btn-sm"
+          onClick={() => this.handleUpdate(post)}
+        >
+          Update
+        </button>
+      </td>
+      <td>
+        <button
+          className="btn btn-danger btn-sm"
+          onClick={() => this.handleDelete(post)}
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  );
+
   render() {
     return (
       <React.Fragment>
@@ -63,29 +85,7 @@ class App extends Component {
               <th>Delete</th>
             </tr>
           </thead>
-          <tbody>
-            {this.state.posts.map(post => (
-              <tr key={post.id}>
-                <td>{post.title}</td>
-                <td>
-                  <button
-                    className="btn btn-info btn-sm"
-                    onClick={() => this.handleUpdate(post)}
-                  >
-                    Update
-                  </button>
-                </td>
-                <td>
-                  <button
-                    className="btn btn-danger btn-sm"
-                    onClick={() => this.handleDelete(post)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+          <tbody>{this.state.posts.map(this.renderPosts)}</tbody>
         </table>
       </React.Fragment>
     );
